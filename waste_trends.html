@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste Trends</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/waste_trends.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Waste Trends</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Location</th>
+                    <th>Waste Type</th>
+                    <th>Total Weight (kg)</th>
+                    <th>Recorded At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for trend in trends %}
+                <tr>
+                    <td>{{ trend[0] }}</td>
+                    <td>{{ trend[1] }}</td>
+                    <td>{{ trend[2] }}</td>
+                    <td>{{ trend[3] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
