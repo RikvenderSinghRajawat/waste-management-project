@@ -38,3 +38,6 @@ waste-management-system/
 │
 ├── README.md                    # Documentation about the project
 └── .gitignore                   # Git ignore file to exclude unnecessary files
+
+
+.
