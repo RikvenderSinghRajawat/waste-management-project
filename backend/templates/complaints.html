@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaints</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/complaints.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+</head>
+<body>
+    <h2>Lodge Complaint</h2>
+    <form action="/complaints" method="POST">
+        <textarea name="complaint" placeholder="Enter your complaint" rows="5" required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+    <a href="{{ url_for('dashboard') }}" class="back-btn">Back to Dashboard</a>
+</body>
+</html>

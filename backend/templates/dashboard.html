@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Waste Management Dashboard</h1>
+        
+        <!-- Log Out Button -->
+        <div class="logout-container">
+            <a href="/logout" class="btn logout-btn">Log Out</a>
+        </div>
+
+        <!-- Buttons for navigation -->
+        <div class="button-container">
+            <a href="/complaints" class="btn">View Complaints</a>
+            <a href="/waste_collection" class="btn">Submit Waste Collection</a>
+            <a href="/waste_trends" class="btn">View Waste Trends</a>
+        </div>
+
+        <h2>Your Complaints</h2>
+        <div class="complaints-section">
+            <div class="complaint-list">
+                {% for complaint in complaints %}
+                    <div class="complaint-item">
+                        <small>{{ complaint[1] }}:</small> <!-- User's name -->
+                        <p>{{ complaint[2] }} (Status: {{ complaint[3] }})</p> <!-- Complaint text and status -->
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="waste-images">
+            <h2>Waste Images</h2>
+            <div class="image-gallery">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJMXwyyhf2ACzVCKqzYNJ_LeglZgyxhtoBrw&s" alt="Waste Image 1">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXLrnG8lFuXx-eivnVbT81aNGS6hg48IChLA&s" alt="Waste Image 2">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0vvHg-rkVzZD_XXH3x30Z6_xcRdIFRaWwpQ&s" alt="Waste Image 3">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
