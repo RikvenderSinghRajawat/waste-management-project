@@ -1,0 +1,80 @@
+/* General Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container Styling */
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading Styling */
+h1 {
+    font-size: 28px;
+    color: #2980b9;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Table Wrapper Styling */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+/* Table Styling */
+.waste-trends-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.waste-trends-table th,
+.waste-trends-table td {
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 16px;
+    border: 1px solid #ddd;
+}
+
+.waste-trends-table th {
+    background-color: #2980b9;
+    color: white;
+    font-weight: bold;
+}
+
+.waste-trends-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.waste-trends-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Responsive Design for Table */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        width: 95%;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .waste-trends-table th,
+    .waste-trends-table td {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+}

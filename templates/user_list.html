@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+    <link rel="stylesheet" href="/static/css/user_list.css">
+</head>
+<body>
+    <script src="/static/js/user_list.js"></script>
+
+    <div class="user-list-container">
+        <h1>All Users</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user[0] }}</td>
+                    <td>{{ user[1] }}</td>
+                    <td>{{ user[2] }}</td>
+                    <td>{{ 'Admin' if user[4] else 'User ' }}</td>
+                    <td>
+                        <form action="{{ url_for('update_user_role', user_id=user[0]) }}" method="POST" style="display: inline;">
+                            <input type="hidden" name="is_admin" value="1">
+                            {% if not user[4] %}
+                            <button type="submit">Make Admin</button>
+                            {% endif %}
+                        </form>
+                        <form action="{{ url_for('delete_user') }}" method="POST" style="display: inline;">
+                            <input type="hidden" name="user_id" value="{{ user[0] }}">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

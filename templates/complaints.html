@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Complaint</title>
+    <link rel="stylesheet" href="/static/css/complaints.css">
+</head>
+<body>
+
+    <script src="/static/js/common.js"></script>
+
+    <!-- Page-Specific JS -->
+    <script src="/static/js/complaints.js"></script>
+
+
+    <div class="container">
+        <h1>Add a Complaint</h1>
+        <form action="/complaints" method="POST">
+            <textarea name="complaint" placeholder="Describe your complaint here..." required></textarea>
+            <button type="submit">Submit Complaint</button>
+        </form>
+    </div>
+</body>
+</html>

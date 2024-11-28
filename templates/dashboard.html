@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+    <script src="/static/js/dashboard.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Profile Section -->
+        <div class="profile-section">
+            <div class="profile">
+                <img src="{{ profile_pic }}" alt="Profile Picture" class="profile-pic" onclick="toggleProfileMenu()">
+                <p class="user-name">{{ user_name }}</p>
+                <div id="profile-menu" class="profile-menu hidden">
+                    <button onclick="location.href='{{ url_for('my_complaints') }}'">My Complaints</button>
+                    <button onclick="location.href='{{ url_for('my_waste_collection') }}'">My Waste Collection</button>
+                    <button onclick="location.href='{{ url_for('logout') }}'">Logout</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Section -->
+        <div class="main-section">
+            <!-- Buttons -->
+            <div class="main-buttons">
+                <!-- <button onclick="location.href='{{ url_for('my_complaints') }}'">My Complaints</button> -->
+                
+                <button onclick="location.href='{{ url_for('complaints') }}'">Add Complaint</button>
+                <button onclick="location.href='{{ url_for('waste_collection') }}'">Add Waste Collection</button>
+                <button onclick="location.href='{{ url_for('waste_trends') }}'">Waste Trends</button>
+                
+            </div>
+
+            <!-- All Complaints Section -->
+            <div class="complaints-section">
+                <h2>All Complaints</h2>
+                <table class="complaints-table">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Complaint</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for complaint in all_complaints %}
+                            <tr>
+                                <td>{{ complaint[0] }}</td>
+                                <td>{{ complaint[1] }}</td>
+                                <td>{{ complaint[2] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

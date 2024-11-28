@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Complaints</title>
+    <link rel="stylesheet" href="/static/css/my_complaints.css">
+</head>
+<body>
+    <div class="my-complaints-container">
+        <h1>My Complaints</h1>
+        <div class="table-wrapper">
+            <table class="my-complaints-table">
+                <thead>
+                    <tr>
+                        <th>Complaint ID</th>
+                        <th>Complaint</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for complaint in user_complaints %}
+                    <tr>
+                        <td>{{ complaint[0] }}</td>
+                        <td class="complaint-text">{{ complaint[1] }}</td>
+                        <td class="complaint-status {{ 'resolved' if complaint[2] == 'Resolved' else 'pending' }}">
+                            {{ complaint[2] }}
+                        </td>
+                        <td>
+                            <!-- <button class="btn btn-view" onclick="viewComplaint({{ complaint[0] }})">View</button> -->
+                            <button class="btn btn-delete" onclick="deleteComplaint({{ complaint[0] }})">Delete</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <button class="back-btn" onclick="window.location.href='/dashboard';">Back to Dashboard</button>
+    </div>
+    <script src="/static/js/common.js"></script>
+    <script src="/static/js/my_complaints.js"></script>
+</body>
+</html>
