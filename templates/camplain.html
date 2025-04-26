@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add camplain</title>
+    <link rel="stylesheet" href="/static/css/camplain.css">
+</head>
+<body>
+
+    <script src="/static/js/common.js"></script>
+
+    <!-- Page-Specific JS -->
+    <script src="/static/js/camplain.js"></script>
+
+
+    <div class="container">
+        <h1>Add a camplain</h1>
+        <form action="/camplain" method="POST">
+            <textarea name="camplain" placeholder="Describe your camplain here..." required></textarea>
+            <button type="submit">Submit camplain</button>
+        </form>
+    </div>
+</body>
+</html>

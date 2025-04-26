@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BABA Waste Management - User Dashboard for eco-friendly waste management">
+    <title>BABA Waste Management - User Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+    <link rel="icon" href="/static/img/favicon.ico" type="image/x-icon">
+</head>
+<body class="user-theme">
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-content user-loader">
+            <div class="recycle-bin animate__animated animate__pulse animate__infinite">
+                <i class="fas fa-recycle"></i>
+            </div>
+            <div class="loader-text">Loading Your Dashboard</div>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="dashboard-container" id="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-leaf"></i>
+                    <span>BABA EcoWaste</span>
+                </div>
+                <button class="toggle-sidebar" id="toggle-sidebar" aria-label="Toggle Sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <!-- Profile Section -->
+            <div class="profile-section">
+                <div class="profile">
+                    <div class="profile-image-container">
+                        <img src="{{ profile_pic|default('/static/profile_pics/default.jpeg', true) }}" alt="Profile Picture" class="profile-pic" id="profile-pic">
+                        <div class="online-indicator"></div>
+                    </div>
+                    <div class="profile-info">
+                        <p class="user-name">{{ user_name }}</p>
+                        <p class="user-role">User</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Navigation Menu -->
+            <nav class="sidebar-menu" id="sidebar-menu">
+                <ul>
+                    <li class="menu-item active">
+                        <a href="{{ url_for('dashboard') }}" aria-current="page">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ url_for('my_camplain') }}">
+                            <i class="fas fa-file-alt"></i>
+                            <span>My Complaints</span>
+                            <span class="notification-badge" id="complaint-badge">{{ user_complaints_count }}</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ url_for('my_waste_collection') }}">
+                            <i class="fas fa-recycle"></i>
+                            <span>My Waste Collection</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ url_for('camplain') }}">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>File Complaint</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ url_for('waste_collection') }}">
+                            <i class="fas fa-truck"></i>
+                            <span>Add Waste Collection</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ url_for('waste_trends') }}">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Waste Trends</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ url_for('logout') }}">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <p>© 2025 BABA Waste Management</p>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search complaints..." id="search-input" aria-label="Search complaints">
+                </div>
+                
+                <div class="header-actions">
+                    <div class="eco-tips" id="eco-tips" role="button" tabindex="0" aria-label="Show eco tips">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Eco Tips</span>
+                    </div>
+                    <div class="theme-toggle" id="theme-toggle" role="button" tabindex="0" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <div class="page-title">
+                    <h1>User Dashboard</h1>
+                    <p>Welcome back, <span class="highlight">{{ user_name }}</span>. Together for a cleaner environment!</p>
+                </div>
+                
+                <!-- Quick Stats -->
+                <div class="quick-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>My Complaints</h3>
+                            <p class="stat-count" id="my-complaints-count" data-count="{{ user_complaints_count }}">{{ user_complaints_count }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-recycle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Waste Collections</h3>
+                            <p class="stat-count" id="my-collections-count" data-count="{{ user_collections_count }}">{{ user_collections_count }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Environmental Impact</h3>
+                            <p class="stat-count" id="eco-impact" data-count="{{ user_eco_impact }}">{{ user_eco_impact }} kg CO₂</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h2>Take Action</h2>
+                    <div class="action-cards">
+                        <div class="action-card" onclick="location.href='{{ url_for('camplain') }}'" role="button" tabindex="0" aria-label="Report an issue">
+                            <div class="action-icon">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <h3>Report an Issue</h3>
+                            <p>Submit a new complaint about waste management in your area</p>
+                        </div>
+                        
+                        <div class="action-card" onclick="location.href='{{ url_for('waste_collection') }}'" role="button" tabindex="0" aria-label="Schedule collection">
+                            <div class="action-icon">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                            <h3>Schedule Collection</h3>
+                            <p>Request waste pickup from your location</p>
+                        </div>
+                        
+                        <div class="action-card" onclick="location.href='{{ url_for('waste_trends') }}'" role="button" tabindex="0" aria-label="View analytics">
+                            <div class="action-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <h3>View Analytics</h3>
+                            <p>See waste collection trends and statistics</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- All Community Complaints Section -->
+                <div class="all-complaints">
+                    <div class="section-header">
+                        <h2>Community Complaints</h2>
+                        <div class="filter-options">
+                            <button class="filter-btn active" data-filter="all">All</button>
+                            <button class="filter-btn" data-filter="pending">Pending</button>
+                            <button class="filter-btn" data-filter="progress">In Progress</button>
+                            <button class="filter-btn" data-filter="complete">Completed</button>
+                        </div>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="complaints-table" aria-label="All community complaints">
+                            <thead>
+                                <tr>
+                                    <th scope="col">User</th>
+                                    <th scope="col">Complaint</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="all-complaints-list">
+                                {% if all_complaints %}
+                                    {% for complaint in all_complaints %}
+                                    <tr class="complaint-row" data-status="{{ complaint[2]|lower }}">
+                                        <td>{{ complaint[0] }}</td>
+                                        <td>{{ complaint[1] }}</td>
+                                        <td>
+                                            <span class="status-badge 
+                                                {% if complaint[2]|lower == 'complete' or complaint[2]|lower == 'completed' %}complete
+                                                {% elif complaint[2]|lower == 'in progress' or complaint[2]|lower == 'processing' %}progress
+                                                {% else %}pending{% endif %}">
+                                                {{ complaint[2] }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <button class="view-btn" data-id="{{ complaint[3] }}" aria-label="View details">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            {% if session.get('is_admin') %}
+                                            <button class="update-btn" data-id="{{ complaint[3] }}" aria-label="Update status">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr id="no-complaints-row">
+                                        <td colspan="4" class="no-data">No complaints found</td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Recent Complaints (User's own complaints) -->
+                <div class="recent-complaints">
+                    <div class="section-header">
+                        <h2>My Recent Complaints</h2>
+                        <a href="{{ url_for('my_camplain') }}" class="view-all">View All</a>
+                    </div>
+                    <div class="table-container">
+                        <table class="complaints-table" aria-label="My recent complaints">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Complaint</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="my-complaints-list">
+                                {% if user_complaints %}
+                                    {% for complaint in user_complaints %}
+                                    <tr class="complaint-row" data-status="{{ complaint[2]|lower }}">
+                                        <td>{{ complaint[1] }}</td>
+                                        <td>
+                                            <span class="status-badge 
+                                                {% if complaint[2]|lower == 'complete' or complaint[2]|lower == 'completed' %}complete
+                                                {% elif complaint[2]|lower == 'in progress' or complaint[2]|lower == 'processing' %}progress
+                                                {% else %}pending{% endif %}">
+                                                {{ complaint[2] }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <button class="view-btn" data-id="{{ complaint[0] }}" aria-label="View details">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="3" class="no-data">No complaints found</td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Complaint Detail Modal -->
+                <div class="modal" id="complaint-modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Complaint Details</h3>
+                            <button class="close-modal"><i class="fas fa-times"></i></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="complaint-detail">
+                                <p><strong>Submitted by:</strong> <span id="modal-user"></span></p>
+                                <p><strong>Status:</strong> <span id="modal-status"></span></p>
+                                <p><strong>Details:</strong></p>
+                                <p id="modal-complaint" class="complaint-text"></p>
+                            </div>
+                            
+                            {% if session.get('is_admin') %}
+                            <div class="admin-actions">
+                                <h4>Update Status</h4>
+                                <form id="update-status-form">
+                                    <input type="hidden" id="complaint-id">
+                                    <select id="status-select">
+                                        <option value="Pending">Pending</option>
+                                        <option value="In Progress">In Progress</option>
+                                        <option value="Complete">Complete</option>
+                                    </select>
+                                    <button type="submit" class="update-status-btn">Update</button>
+                                </form>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Eco Tips -->
+                <div class="eco-tips-panel" id="eco-tips-panel">
+                    <div class="eco-tips-header">
+                        <h3>Daily Eco Tips</h3>
+                        <button id="close-tips" aria-label="Close eco tips"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="eco-tip" id="current-tip">
+                        <div class="tip-icon"><i class="fas fa-seedling"></i></div>
+                        <p>Separate your waste into recyclables, compostables, and non-recyclables to maximize resource recovery.</p>
+                    </div>
+                    <button class="next-tip" id="next-tip">Next Tip</button>
+                </div>
+                
+                <!-- Toast Notification Container -->
+                <div class="toast-container" id="toast-container"></div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+    window.addEventListener('DOMContentLoaded', function () {
+        const loader = document.getElementById('loader');
+        const dashboard = document.getElementById('dashboard-container');
+        
+        if (loader && dashboard) {
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+                dashboard.style.display = 'flex'; // Make dashboard visible
+                document.body.classList.add('loaded');
+            }, 500);
+        }
+    });
+    </script>
+    
+    <script src="/static/js/dashboard.js"></script>
+</body>
+</html>

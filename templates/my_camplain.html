@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My camplain</title>
+    <link rel="stylesheet" href="/static/css/my_camplain.css">
+</head>
+<body>
+    <div class="my-camplain-container">
+        <h1>My camplain</h1>
+        <div class="table-wrapper">
+            <table class="my-camplain-table">
+                <thead>
+                    <tr>
+                        <th>camplain ID</th>
+                        <th>camplain</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for camplain in user_camplain %}
+                    <tr>
+                        <td>{{ camplain[0] }}</td>
+                        <td class="camplain-text">{{ camplain[1] }}</td>
+                        <td class="camplain-status {{ 'resolved' if camplain[2] == 'Resolved' else 'pending' }}">
+                            {{ camplain[2] }}
+                        </td>
+                        <td>
+                            <!-- <button class="btn btn-view" onclick="viewcamplain({{ camplain[0] }})">View</button> -->
+                            <button class="btn btn-delete" onclick="deletecamplain({{ camplain[0] }})">Delete</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <button class="back-btn" onclick="window.location.href='/dashboard';">Back to Dashboard</button>
+    </div>
+    <script src="/static/js/common.js"></script>
+    <script src="/static/js/my_camplain.js"></script>
+</body>
+</html>

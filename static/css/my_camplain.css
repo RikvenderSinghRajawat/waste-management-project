@@ -1,0 +1,141 @@
+/* General Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container Styling */
+.my-camplain-container {
+    width: 85%;
+    max-width: 1200px;
+    margin: 50px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Styling */
+h1 {
+    text-align: center;
+    color: #343a40;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Table Wrapper */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+/* Table Styling */
+.my-camplain-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.my-camplain-table th, .my-camplain-table td {
+    text-align: left;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    word-wrap: break-word;
+}
+
+.my-camplain-table th {
+    background-color: #343a40;
+    color: white;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.my-camplain-table td {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* camplain Text Styling */
+.my-camplain-table td.camplain-text {
+    white-space: pre-wrap;
+}
+
+/* Status Styling */
+.my-camplain-table td.camplain-status {
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.my-camplain-table td.camplain-status.resolved {
+    background-color: #28a745;
+}
+
+.my-camplain-table td.camplain-status.pending {
+    background-color: #dc3545;
+}
+
+/* Action Buttons */
+.btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    font-size: 13px;
+}
+
+.btn-view {
+    background-color: #007bff;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+}
+
+.btn:hover {
+    opacity: 0.85;
+}
+
+/* Back Button */
+.back-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    font-size: 14px;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.back-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .my-camplain-container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .my-camplain-table th, .my-camplain-table td {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .btn {
+        font-size: 11px;
+        padding: 5px 10px;
+    }
+
+    .back-btn {
+        font-size: 12px;
+    }
+}

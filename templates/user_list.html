@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+    <link rel="stylesheet" href="/static/css/user_list.css">
+</head>
+<body>
+    <div class="user-list-container">
+        <h1>All Users</h1>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search users...">
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th data-sort="id">User ID</th>
+                    <th data-sort="name">Name</th>
+                    <th data-sort="email">Email</th>
+                    <th data-sort="role">Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user[0] }}</td>
+                    <td>{{ user[1] }}</td>
+                    <td>{{ user[2] }}</td>
+                    <td>{{ 'Admin' if user[4] else 'User ' }}</td>
+                    <td>
+                        <form action="{{ url_for('update_user_role', user_id=user[0]) }}" method="POST" style="display: inline;">
+                            <input type="hidden" name="is_admin" value="1">
+                            {% if not user[4] %}
+                            <button type="submit" class="btn promote-btn">Make Admin</button>
+                            {% endif %}
+                        </form>
+                        <form action="{{ url_for('delete_user', user_id=user[0]) }}" method="POST" style="display: inline;">
+                            <button type="submit" class="btn delete-btn">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="/static/js/user_list.js"></script>
+</body>
+</html>

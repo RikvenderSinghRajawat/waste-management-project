@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Waste Collection</title>
+    <link rel="stylesheet" href="/static/css/my_waste_collection.css">
+</head>
+<body>
+    <div class="container">
+        <h1>My Waste Collection</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Location</th>
+                    <th>Waste Type</th>
+                    <th>Weight (kg)</th>
+                  
+                </tr>
+            </thead>
+            <tbody>
+                {% for waste in waste %}
+                    <tr>
+                        
+                        <td>{{ waste[2] }}</td>
+                        <td>{{ waste[3] }}</td>
+                        <td>{{ waste[4] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button class="back-btn" onclick="window.location.href='/dashboard';">Back to Dashboard</button>
+    </div>
+</body>
+</html>

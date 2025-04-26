@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste Trends</title>
+    <link rel="stylesheet" href="/static/css/waste_trends.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Waste Trends</h1>
+        <div class="table-wrapper">
+            <table class="waste-trends-table">
+                <thead>
+                    <tr>
+                        <th>Location</th>
+                        <th>Type</th>
+                        <th>Weight (kg)</th>
+                      
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for trend in trends %}
+                    <tr>
+                        <td>{{ trend[0] }}</td>
+                        <td>{{ trend[1] }}</td>
+                        <td>{{ trend[2] }}</td>
+                       
+                        
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="/static/js/common.js"></script>
+
+    <!-- Page-Specific JS -->
+    <script src="/static/js/waste_trends.js"></script>
+</body>
+</html>

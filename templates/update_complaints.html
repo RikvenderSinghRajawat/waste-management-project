@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Complaints</title>
+    <link rel="stylesheet" href="/static/css/update_complain.css">
+</head>
+<body>
+    <div class="update-camplain-container">
+        <h1>Update Complaints</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Complaint ID</th>
+                    <th>User</th>
+                    <th>Complaint</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for complaint in camplain %}
+                <tr>
+                    <td>{{ complaint[0] }}</td>
+                    <td>{{ complaint[1] }}</td>
+                    <td>{{ complaint[2] }}</td>
+                    <td>{{ complaint[3] }}</td>
+                    <td>
+                        <form action="{{ url_for('update_complaint_status') }}" method="POST" style="display: inline;">
+                            <input type="hidden" name="complaint_id" value="{{ complaint[0] }}">
+                            {% if complaint[3] != 'Complete' %}
+                            <button type="submit" name="action" value="mark_complete">Mark Complete</button>
+                            {% endif %}
+                        </form>
+                        <form action="{{ url_for('delete_complaint') }}" method="POST" style="display: inline;">
+                            <input type="hidden" name="complaint_id" value="{{ complaint[0] }}">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="/static/js/update_camplain.js"></script>
+</body>
+</html>
